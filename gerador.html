@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    function urlParamsToObject() {
+      const result = {}
+      const url = new URL(window.location);
+      for (const [key, value] of url.searchParams.entries()) {
+        result[key] = value;
+      }
+
+      return result;
+    }
+
+    const qParams = urlParamsToObject();
+    const text = atob(qParams.t);
+    // const text = qParams.t;
+    document.title = text || 'index';
+  </script>
+</head>
+<body>
+  <!-- Body -->
+  <input type="text" id="input-title">
+  <button id="btn-gerar">Gerar</button>
+
+  <script>
+    document.querySelector('#btn-gerar').addEventListener('click', function(event) {
+      const title = document.querySelector('#input-title').value;
+      const base64Title = btoa(title);
+      const url = new URL(window.location.origin + window.location.pathname);
+      url.searchParams.set('t', base64Title);
+      window.location = url
+    });
+  </script>
+</body>
+</html>
