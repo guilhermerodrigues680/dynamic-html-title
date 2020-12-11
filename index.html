@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    function urlParamsToObject() {
+      const result = {}
+      const url = new URL(window.location);
+      for (const [key, value] of url.searchParams.entries()) {
+        result[key] = value;
+      }
+
+      return result;
+    }
+
+    const qParams = urlParamsToObject();
+    const text = atob(qParams.t);
+    // const text = qParams.t;
+    document.title = text || 'index';
+  </script>
+</head>
+<body>
+  <script>
+    document.body.innerText = document.title;
+  </script>
+</body>
+</html>
